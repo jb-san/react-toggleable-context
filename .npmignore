@@ -1,0 +1,7 @@
+src/
+test/
+.npmignore
+.babelrc
+.eslintrc
+prettier.config.js
+rollup.config.js

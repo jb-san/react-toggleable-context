@@ -32,8 +32,12 @@
     "homepage": "https://github.com/jb-san/react-expandable-context#readme",
     "devDependencies": {
         "@babel/core": "^7.1.6",
+        "@babel/plugin-proposal-class-properties": "^7.1.0",
+        "@babel/preset-env": "^7.1.6",
+        "@babel/preset-react": "^7.0.0",
         "babel-preset-react": "^6.24.1",
-        "lodash": "^4.17.11",
+        "lodash-es": "^4.17.11",
+        "prop-types": "^15.6.2",
         "react": "^16.6.3",
         "rollup": "^0.67.3",
         "rollup-plugin-auto-external": "^2.0.0",
@@ -43,6 +47,7 @@
         "rollup-plugin-uglify": "^6.0.0"
     },
     "peerDependencies": {
+        "prop-types": "^15.6.2",
         "react": "^16.6.3"
     }
 }
