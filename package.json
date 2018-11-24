@@ -1,0 +1,48 @@
+{
+    "name": "react-expandable-context",
+    "version": "0.1.0",
+    "description": "React components to make anything expandable",
+    "main": "dist/index.js",
+    "module": "dist/index.es.js",
+    "jsnext:main": "dist/index.es.js",
+    "scripts": {
+        "build": "rollup -c",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jb-san/react-expandable-context.git"
+    },
+    "keywords": [
+        "react",
+        "expand",
+        "expandable",
+        "accordion",
+        "accordions",
+        "context",
+        "folding",
+        "collapse",
+        "collapsable"
+    ],
+    "author": "Jonathan Borg <jonathan@x3m.io>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jb-san/react-expandable-context/issues"
+    },
+    "homepage": "https://github.com/jb-san/react-expandable-context#readme",
+    "devDependencies": {
+        "@babel/core": "^7.1.6",
+        "babel-preset-react": "^6.24.1",
+        "lodash": "^4.17.11",
+        "react": "^16.6.3",
+        "rollup": "^0.67.3",
+        "rollup-plugin-auto-external": "^2.0.0",
+        "rollup-plugin-babel": "^4.0.3",
+        "rollup-plugin-commonjs": "^9.2.0",
+        "rollup-plugin-node-resolve": "^3.4.0",
+        "rollup-plugin-uglify": "^6.0.0"
+    },
+    "peerDependencies": {
+        "react": "^16.6.3"
+    }
+}
