@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { without } from 'lodash-es';
+import { without } from './utils';
+
 export const Context = React.createContext();
+
+class ExpandableSection extends Component {
+    static propTypes = {
+        id: PropTypes.string.isRequired,
+        children: PropTypes.func.isRequired
+    };
+    static contextType = Context;
+    render() {
+        const { id, expanded, ...props } = this.props;
+        let { expanded: expandedList, handleSectionClick } = this.context;
+
+        return props.children({
+            ...props,
+            expanded: expandedList.includes(id),
+            handleClick: handleSectionClick(id)
+        });
+    }
+}
 
 export default class Expandable extends Component {
     state = {
@@ -10,7 +29,8 @@ export default class Expandable extends Component {
 
     static Section = ExpandableSection;
     static propTypes = {
-        expanded: PropTypes.arrayOf(PropTypes.string)
+        expanded: PropTypes.arrayOf(PropTypes.string),
+        collapse: PropTypes.bool
     };
 
     componentDidMount() {
@@ -18,7 +38,6 @@ export default class Expandable extends Component {
     }
 
     componentWillUnmount() {
-        // clean up listeners
         window.removeEventListener('hashchange', this.handleLocationChange);
     }
 

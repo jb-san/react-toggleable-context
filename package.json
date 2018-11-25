@@ -7,7 +7,8 @@
     "jsnext:main": "dist/index.es.js",
     "scripts": {
         "build": "rollup -c",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "NODE_ENV=test jest",
+        "test:watch": "jest --watch"
     },
     "repository": {
         "type": "git",
@@ -33,12 +34,30 @@
     "devDependencies": {
         "@babel/core": "^7.1.6",
         "@babel/plugin-proposal-class-properties": "^7.1.0",
+        "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+        "@babel/plugin-transform-modules-commonjs": "^7.1.0",
         "@babel/preset-env": "^7.1.6",
         "@babel/preset-react": "^7.0.0",
+        "babel-core": "^7.0.0-bridge.0",
+        "babel-jest": "^23.6.0",
+        "babel-polyfill": "^6.26.0",
         "babel-preset-react": "^6.24.1",
-        "lodash-es": "^4.17.11",
+        "enzyme": "^3.7.0",
+        "enzyme-adapter-react-16": "^1.7.0",
+        "eslint": "^4.19.1",
+        "eslint-config-airbnb": "^17.0.0",
+        "eslint-config-jest-enzyme": "^6.0.2",
+        "eslint-plugin-babel": "^5.1.0",
+        "eslint-plugin-import": "^2.12.0",
+        "eslint-plugin-jest": "^21.18.0",
+        "eslint-plugin-jsx-a11y": "^6.0.3",
+        "eslint-plugin-prettier": "^2.6.0",
+        "eslint-plugin-react": "^7.9.1",
+        "jest": "^23.6.0",
         "prop-types": "^15.6.2",
         "react": "^16.6.3",
+        "react-dom": "^16.6.3",
+        "regenerator-runtime": "^0.13.1",
         "rollup": "^0.67.3",
         "rollup-plugin-auto-external": "^2.0.0",
         "rollup-plugin-babel": "^4.0.3",
@@ -49,5 +68,13 @@
     "peerDependencies": {
         "prop-types": "^15.6.2",
         "react": "^16.6.3"
+    },
+    "jest": {
+        "setupFiles": [
+            "<rootDir>/enzyme.config.js"
+        ],
+        "transform": {
+            "^.+\\.js$": "babel-jest"
+        }
     }
 }
