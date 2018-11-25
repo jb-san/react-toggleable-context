@@ -2,6 +2,8 @@
 
 React components to make anything to be expandable
 
+## [Demo](https://codesandbox.io/s/m9qzrrymmx)
+
 ## Installation
 
 `npm i react-expandable-context`
