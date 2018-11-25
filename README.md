@@ -47,4 +47,20 @@ function MyComponent(props) {
 }
 ```
 
-## TODO: document props
+the `Expandable` component provides the context and `Expandable.Section` gives you the `handleClick` and `expanded` renderprops. The section must have an unique id inorder to be toggled.
+
+### Expandable
+
+| Prop          | Type  | Description                                                                                                                                                                                        |
+| ------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| collapse      | bool  | if set, all other expanded sections will collapse when another section is pressed                                                                                                                  |
+| expanded      | array | if given a list of ids those sections will have expanded true on initial render                                                                                                                    |
+| respondToHash | bool  | the expandable component will react to changes in window.location.hash, and add the has to the list of expanded sections, useful if you want to open a section from outside the Expandable context |
+
+### Expandable.Section
+
+| Prop     | Type   | Description                                                                                  | required |
+| -------- | ------ | -------------------------------------------------------------------------------------------- | -------- |
+| id       | string | must be unique                                                                               | true     |
+| children | fn     | gives you 2 render props, handleClick, and expanded, the handleClick is bound to the section | true     |
+|          |        |                                                                                              |          |
