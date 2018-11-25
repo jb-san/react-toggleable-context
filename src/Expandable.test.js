@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-
 import Expandable from './Expandable';
 
 describe('Expandable Component', () => {
@@ -337,6 +336,54 @@ describe('Expandable Component', () => {
                 .find('#section-body')
                 .props().expanded
         ).toBe('false');
+        wrapper.unmount();
+    });
+    test('should be expanded if respondToHash prop is set', () => {
+        window.location.hash = '#second';
+
+        const wrapper = mount(
+            <Expandable respondToHash>
+                <Expandable.Section id={'first'}>
+                    {({ handleClick, expanded }) => (
+                        <>
+                            <a id={'link'} onClick={handleClick}>
+                                Header
+                            </a>
+                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                                lorem
+                            </div>
+                            )
+                        </>
+                    )}
+                </Expandable.Section>
+                <Expandable.Section id={'second'}>
+                    {({ handleClick, expanded }) => (
+                        <>
+                            <a id={'link'} onClick={handleClick}>
+                                Header
+                            </a>
+                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                                lorem
+                            </div>
+                            )
+                        </>
+                    )}
+                </Expandable.Section>
+            </Expandable>
+        );
+        expect(
+            wrapper
+                .find('#first')
+                .find('#section-body')
+                .props().expanded
+        ).toBe('false');
+        expect(
+            wrapper
+                .find('#second')
+                .find('#section-body')
+                .props().expanded
+        ).toBe('true');
+
         wrapper.unmount();
     });
 });

@@ -30,15 +30,23 @@ export default class Expandable extends Component {
     static Section = ExpandableSection;
     static propTypes = {
         expanded: PropTypes.arrayOf(PropTypes.string),
-        collapse: PropTypes.bool
+        collapse: PropTypes.bool,
+        respondToHash: PropTypes.bool
     };
 
     componentDidMount() {
-        window.addEventListener('hashchange', this.handleLocationChange);
+        const { respondToHash } = this.props;
+        if (respondToHash) {
+            this.handleLocationChange();
+            window.addEventListener('hashchange', this.handleLocationChange);
+        }
     }
 
     componentWillUnmount() {
-        window.removeEventListener('hashchange', this.handleLocationChange);
+        const { respondToHash } = this.props;
+        if (respondToHash) {
+            window.removeEventListener('hashchange', this.handleLocationChange);
+        }
     }
 
     handleLocationChange = () => {
