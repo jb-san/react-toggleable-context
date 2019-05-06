@@ -1,6 +1,7 @@
 # react-toggleable-context
 
 React components to make anything to be toggleable
+cam be used to make a custom accordion, or.. anything really
 
 ## [Demo](https://codesandbox.io/s/7mlqvn0370)
 
