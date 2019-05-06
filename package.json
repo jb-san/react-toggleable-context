@@ -1,6 +1,6 @@
 {
     "name": "react-toggleable-context",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "React components to make anything expandable",
     "main": "lib/index.js",
     "files": [
