@@ -13,7 +13,7 @@ React components to make anything to be toggleable
 ## Usage
 
 ```jsx
-import ToggleGroup from 'react-toggleable-context';
+import ToggleGroup, { useToggleable } from 'react-toggleable-context';
 function FirstComponent() {
     const { toggled, handleClick } = useToggleable('first');
     return (
