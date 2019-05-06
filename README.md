@@ -14,6 +14,44 @@ React components to make anything to be toggleable
 
 ```jsx
 import ToggleGroup from 'react-toggleable-context';
+function FirstComponent() {
+    const { toggled, handleClick } = useToggleable('first');
+    return (
+        <div id={'first'}>
+            <a id={'link'} onClick={handleClick}>
+                Header
+            </a>
+            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
+                lorem
+            </div>
+        </div>
+    );
+}
+function SecondComponent() {
+    const { toggled, handleClick } = useToggleable('second');
+    return (
+        <div id={'second'}>
+            <a id={'link'} onClick={handleClick}>
+                Header
+            </a>
+            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
+                lorem
+            </div>
+        </div>
+    );
+}
+function MyComponent(props) {
+    return (
+        <ToggleGroup>
+            <FirstComponent />
+            <SecondComponent />
+        </ToggleGroup>
+    );
+}
+```
+
+```jsx
+import ToggleGroup from 'react-toggleable-context';
 
 function MyComponent(props) {
     return (

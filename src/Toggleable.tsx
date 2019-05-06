@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import { normalizeId, without } from './utils';
 interface ToggleableContextTypes {
-    toggled: string[];
+    toggled: Array<string>;
     handleSectionClick: Function;
     handleOpen: Function;
     handleClose: Function;
@@ -51,7 +51,7 @@ function Toggleable({
     collapse = false,
     children
 }: {
-    initialExpanded?: string[];
+    initialExpanded?: Array<string>;
     collapse?: boolean;
     children: any;
 }) {
@@ -80,8 +80,9 @@ function Toggleable({
         const loc = window.location;
         const hashId = normalizeId(loc.hash);
         if (toggled.includes(hashId)) {
-            if ('replaceState' in window.history)
+            if ('replaceState' in window.history) {
                 window.history.replaceState('', document.title, loc.pathname + loc.search);
+            }
             else {
                 // Prevent scrolling by storing the page's current scroll offset
                 const scrollV = document.body.scrollTop;
@@ -112,9 +113,9 @@ function Toggleable({
         <ToggleableContext.Provider
             value={{
                 toggled,
-                handleSectionClick: handleSectionClick,
-                handleOpen: handleOpen,
-                handleClose: handleClose
+                handleSectionClick,
+                handleOpen,
+                handleClose
             }}
         >
             {children}
