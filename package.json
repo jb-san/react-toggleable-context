@@ -6,10 +6,10 @@
     "module": "dist/index.es.js",
     "jsnext:main": "dist/index.es.js",
     "scripts": {
-        "build": "rollup -c",
-        "test": "NODE_ENV=test jest",
-        "test:watch": "jest --watch",
-        "prepublishOnly": "npm run build"
+        "build": "rm -rf ./lib && tsc",
+        "test": "jest --env=jsdom",
+        "lint": "tslint -c tslint.json --project tsconfig.json",
+        "prepare": "yarn test && yarn lint && yarn build"
     },
     "repository": {
         "type": "git",
@@ -24,7 +24,9 @@
         "context",
         "folding",
         "collapse",
-        "collapsable"
+        "collapsable",
+        "toggle",
+        "typescript"
     ],
     "author": "Jonathan Borg <jonathan@x3m.io>",
     "license": "MIT",
@@ -33,49 +35,28 @@
     },
     "homepage": "https://github.com/jb-san/react-expandable-context#readme",
     "devDependencies": {
-        "@babel/core": "^7.1.6",
-        "@babel/plugin-proposal-class-properties": "^7.1.0",
-        "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-        "@babel/plugin-transform-modules-commonjs": "^7.1.0",
-        "@babel/preset-env": "^7.1.6",
-        "@babel/preset-react": "^7.0.0",
-        "babel-core": "^7.0.0-bridge.0",
-        "babel-jest": "^23.6.0",
-        "babel-polyfill": "^6.26.0",
-        "babel-preset-react": "^6.24.1",
-        "enzyme": "^3.7.0",
-        "enzyme-adapter-react-16": "^1.7.0",
-        "eslint": "^4.19.1",
-        "eslint-config-airbnb": "^17.0.0",
-        "eslint-config-jest-enzyme": "^6.0.2",
-        "eslint-plugin-babel": "^5.1.0",
-        "eslint-plugin-import": "^2.12.0",
-        "eslint-plugin-jest": "^21.18.0",
-        "eslint-plugin-jsx-a11y": "^6.0.3",
-        "eslint-plugin-prettier": "^2.6.0",
-        "eslint-plugin-react": "^7.9.1",
-        "jest": "^23.6.0",
-        "prop-types": "^15.6.2",
-        "react": "^16.6.3",
-        "react-dom": "^16.6.3",
-        "regenerator-runtime": "^0.13.1",
-        "rollup": "^0.67.3",
-        "rollup-plugin-auto-external": "^2.0.0",
-        "rollup-plugin-babel": "^4.0.3",
-        "rollup-plugin-commonjs": "^9.2.0",
-        "rollup-plugin-node-resolve": "^3.4.0",
-        "rollup-plugin-uglify": "^6.0.0"
+        "@types/enzyme": "^3.9.1",
+        "@types/enzyme-adapter-react-16": "^1.0.5",
+        "@types/jest": "^24.0.11",
+        "@types/jsdom": "^12.2.3",
+        "@types/node": "^11.13.7",
+        "@types/react": "^16.8.13",
+        "@types/react-dom": "^16.8.4",
+        "enzyme": "^3.9.0",
+        "enzyme-adapter-react-16": "^1.12.1",
+        "jest": "^24.7.1",
+        "jsdom": "^14.0.0",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "ts-jest": "^24.0.2",
+        "tslint": "^5.15.0",
+        "tslint-react": "^4.0.0",
+        "typescript": "^3.4.3"
     },
     "peerDependencies": {
-        "prop-types": "^15.6.2",
-        "react": "^16.6.3"
+        "react": "^16.8.6"
     },
-    "jest": {
-        "setupFiles": [
-            "<rootDir>/enzyme.config.js"
-        ],
-        "transform": {
-            "^.+\\.js$": "babel-jest"
-        }
+    "dependencies": {
+        "enzyme-to-json": "^3.3.5"
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Expandable from './Expandable';
+import Expandable, { useExpandable } from './Expandable';
 
 describe('Expandable Component', () => {
     test('should pass expanded state for section and update it when handleClick is called', () => {
@@ -12,7 +12,7 @@ describe('Expandable Component', () => {
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -25,7 +25,7 @@ describe('Expandable Component', () => {
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -34,36 +34,34 @@ describe('Expandable Component', () => {
                 </Expandable.Section>
             </Expandable>
         );
-
         expect(
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('false');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('false');
 
         wrapper
             .find('#first')
             .find('#link')
             .simulate('click');
-
         expect(
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('false');
 
         wrapper
@@ -75,13 +73,13 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         wrapper.unmount();
     });
@@ -94,7 +92,7 @@ describe('Expandable Component', () => {
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -107,7 +105,7 @@ describe('Expandable Component', () => {
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -120,7 +118,7 @@ describe('Expandable Component', () => {
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -137,13 +135,13 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('false');
 
         wrapper
@@ -158,32 +156,32 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('false');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         expect(
             wrapper
                 .find('#third')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('false');
         wrapper.unmount();
     });
     test('should start expanded if expanded prop is given to Expandable component', () => {
         const wrapper = mount(
-            <Expandable expanded={['first', 'second']}>
+            <Expandable initialExpanded={['first', 'second']}>
                 <Expandable.Section id={'first'}>
                     {({ handleClick, expanded }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -196,7 +194,7 @@ describe('Expandable Component', () => {
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -209,7 +207,7 @@ describe('Expandable Component', () => {
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -223,19 +221,19 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         expect(
             wrapper
                 .find('#third')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('false');
 
         wrapper
@@ -246,20 +244,20 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#third')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         wrapper.unmount();
     });
     test('should start expanded if expanded prop is given to Expandable component but collapse if collapse prop is given', () => {
         const wrapper = mount(
-            <Expandable expanded={['first', 'second']} collapse>
+            <Expandable initialExpanded={['first', 'second']} collapse>
                 <Expandable.Section id={'first'}>
                     {({ handleClick, expanded }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -272,7 +270,7 @@ describe('Expandable Component', () => {
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -285,7 +283,7 @@ describe('Expandable Component', () => {
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -300,19 +298,19 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         expect(
             wrapper
                 .find('#third')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('false');
         wrapper
             .find('#third')
@@ -322,34 +320,34 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#third')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
         expect(
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('false');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('false');
         wrapper.unmount();
     });
-    test('should be expanded if respondToHash prop is set', () => {
-        window.location.hash = '#second';
+    test('should be set initial expanded to window.location.hash ', () => {
+        window.location.hash = 'second';
 
         const wrapper = mount(
-            <Expandable respondToHash>
+            <Expandable>
                 <Expandable.Section id={'first'}>
                     {({ handleClick, expanded }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -362,7 +360,7 @@ describe('Expandable Component', () => {
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
@@ -375,13 +373,65 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
+        ).toBe('false');
+        wrapper
+            .find('#first')
+            .find('#link')
+            .simulate('click');
+        expect(
+            wrapper
+                .find('#first')
+                .find('#section-body')
+                .prop('data-expanded')
+        ).toBe('true');
+
+        wrapper.unmount();
+    });
+    test('should work with the hook ', () => {
+        function FirstComponent() {
+            const { expanded, handleClick } = useExpandable('first');
+            return (
+                <div id={'first'}>
+                    <a id={'link'} onClick={handleClick}>
+                        Header
+                    </a>
+                    <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                        lorem
+                    </div>
+                </div>
+            );
+        }
+        function SecondComponent() {
+            const { expanded, handleClick } = useExpandable('second');
+            return (
+                <div id={'second'}>
+                    <a id={'link'} onClick={handleClick}>
+                        Header
+                    </a>
+                    <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                        lorem
+                    </div>
+                </div>
+            );
+        }
+        const wrapper = mount(
+            <Expandable>
+                <FirstComponent />
+                <SecondComponent />
+            </Expandable>
+        );
+        expect(
+            wrapper
+                .find('#first')
+                .find('#section-body')
+                .prop('data-expanded')
         ).toBe('false');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .props().expanded
+                .prop('data-expanded')
         ).toBe('true');
 
         wrapper.unmount();
