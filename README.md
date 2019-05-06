@@ -3,6 +3,8 @@
 React components to make anything to be toggleable
 cam be used to make a custom accordion, or.. anything really
 
+it keeps track of a list of ids, that can then be used to toggle and collpase anything you can think of
+
 ## [Demo](https://codesandbox.io/s/7mlqvn0370)
 
 ## Installation
