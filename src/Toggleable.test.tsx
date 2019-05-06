@@ -174,7 +174,7 @@ describe('Toggleable Component', () => {
     });
     test('should start toggled if toggled prop is given to Toggleable component', () => {
         const wrapper = mount(
-            <Toggleable initialExpanded={['first', 'second']}>
+            <Toggleable initialToggled={['first', 'second']}>
                 <Toggleable.Section id={'first'}>
                     {({ handleClick, toggled }) => (
                         <>
@@ -250,7 +250,7 @@ describe('Toggleable Component', () => {
     });
     test('should start toggled if toggled prop is given to Toggleable component but collapse if collapse prop is given', () => {
         const wrapper = mount(
-            <Toggleable initialExpanded={['first', 'second']} collapse>
+            <Toggleable initialToggled={['first', 'second']} collapse>
                 <Toggleable.Section id={'first'}>
                     {({ handleClick, toggled }) => (
                         <>

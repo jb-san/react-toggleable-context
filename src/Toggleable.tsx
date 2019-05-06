@@ -47,15 +47,15 @@ function ToggleableSection({ id, children, ...props }: ToggleableSectionProps): 
 }
 
 function Toggleable({
-    initialExpanded = [],
+    initialToggled = [],
     collapse = false,
     children
 }: {
-    initialExpanded?: Array<string>;
+    initialToggled?: Array<string>;
     collapse?: boolean;
     children: any;
 }) {
-    const [{ toggled }, setToggled] = useState({ toggled: initialExpanded });
+    const [{ toggled }, setToggled] = useState({ toggled: initialToggled });
 
     /**
      * Set toggled if url contains # fragment
@@ -82,8 +82,7 @@ function Toggleable({
         if (toggled.includes(hashId)) {
             if ('replaceState' in window.history) {
                 window.history.replaceState('', document.title, loc.pathname + loc.search);
-            }
-            else {
+            } else {
                 // Prevent scrolling by storing the page's current scroll offset
                 const scrollV = document.body.scrollTop;
                 const scrollH = document.body.scrollLeft;
