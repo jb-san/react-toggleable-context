@@ -1,6 +1,6 @@
 {
-    "name": "react-expandable-context",
-    "version": "0.1.0",
+    "name": "react-toggleable-context",
+    "version": "1.0.0",
     "description": "React components to make anything expandable",
     "main": "dist/index.js",
     "module": "dist/index.es.js",
@@ -13,7 +13,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/jb-san/react-expandable-context.git"
+        "url": "git+https://github.com/jb-san/react-toggleable-context.git"
     },
     "keywords": [
         "react",
@@ -26,14 +26,15 @@
         "collapse",
         "collapsable",
         "toggle",
+        "toggleable",
         "typescript"
     ],
     "author": "Jonathan Borg <jonathan@x3m.io>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/jb-san/react-expandable-context/issues"
+        "url": "https://github.com/jb-san/react-toggleable-context/issues"
     },
-    "homepage": "https://github.com/jb-san/react-expandable-context#readme",
+    "homepage": "https://github.com/jb-san/react-toggleable-context#readme",
     "devDependencies": {
         "@types/enzyme": "^3.9.1",
         "@types/enzyme-adapter-react-16": "^1.0.5",

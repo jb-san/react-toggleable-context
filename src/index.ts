@@ -1,1 +1,1 @@
-export * from './Expandable';
+export * from './Toggleable';

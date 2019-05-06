@@ -1,50 +1,50 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Expandable, { useExpandable } from './Expandable';
+import Toggleable, { useToggleable } from './Toggleable';
 
-describe('Expandable Component', () => {
-    test('should pass expanded state for section and update it when handleClick is called', () => {
+describe('Toggleable Component', () => {
+    test('should pass toggled state for section and update it when handleClick is called', () => {
         const wrapper = mount(
-            <Expandable>
-                <Expandable.Section id={'first'}>
-                    {({ handleClick, expanded }) => (
+            <Toggleable>
+                <Toggleable.Section id={'first'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-                <Expandable.Section id={'second'}>
-                    {({ handleClick, expanded }) => (
+                </Toggleable.Section>
+                <Toggleable.Section id={'second'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-            </Expandable>
+                </Toggleable.Section>
+            </Toggleable>
         );
         expect(
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
 
         wrapper
@@ -55,13 +55,13 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
 
         wrapper
@@ -73,59 +73,59 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         wrapper.unmount();
     });
-    test('should collapse other sections if collapse prop is given to Expandable', () => {
+    test('should collapse other sections if collapse prop is given to Toggleable', () => {
         const wrapper = mount(
-            <Expandable collapse>
-                <Expandable.Section id={'first'}>
-                    {({ handleClick, expanded }) => (
+            <Toggleable collapse>
+                <Toggleable.Section id={'first'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-                <Expandable.Section id={'second'}>
-                    {({ handleClick, expanded }) => (
+                </Toggleable.Section>
+                <Toggleable.Section id={'second'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-                <Expandable.Section id={'third'}>
-                    {({ handleClick, expanded }) => (
+                </Toggleable.Section>
+                <Toggleable.Section id={'third'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-            </Expandable>
+                </Toggleable.Section>
+            </Toggleable>
         );
         wrapper
             .find('#first')
@@ -135,13 +135,13 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
 
         wrapper
@@ -156,84 +156,84 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         expect(
             wrapper
                 .find('#third')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
         wrapper.unmount();
     });
-    test('should start expanded if expanded prop is given to Expandable component', () => {
+    test('should start toggled if toggled prop is given to Toggleable component', () => {
         const wrapper = mount(
-            <Expandable initialExpanded={['first', 'second']}>
-                <Expandable.Section id={'first'}>
-                    {({ handleClick, expanded }) => (
+            <Toggleable initialExpanded={['first', 'second']}>
+                <Toggleable.Section id={'first'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-                <Expandable.Section id={'second'}>
-                    {({ handleClick, expanded }) => (
+                </Toggleable.Section>
+                <Toggleable.Section id={'second'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-                <Expandable.Section id={'third'}>
-                    {({ handleClick, expanded }) => (
+                </Toggleable.Section>
+                <Toggleable.Section id={'third'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-            </Expandable>
+                </Toggleable.Section>
+            </Toggleable>
         );
 
         expect(
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         expect(
             wrapper
                 .find('#third')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
 
         wrapper
@@ -244,73 +244,73 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#third')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         wrapper.unmount();
     });
-    test('should start expanded if expanded prop is given to Expandable component but collapse if collapse prop is given', () => {
+    test('should start toggled if toggled prop is given to Toggleable component but collapse if collapse prop is given', () => {
         const wrapper = mount(
-            <Expandable initialExpanded={['first', 'second']} collapse>
-                <Expandable.Section id={'first'}>
-                    {({ handleClick, expanded }) => (
+            <Toggleable initialExpanded={['first', 'second']} collapse>
+                <Toggleable.Section id={'first'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-                <Expandable.Section id={'second'}>
-                    {({ handleClick, expanded }) => (
+                </Toggleable.Section>
+                <Toggleable.Section id={'second'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-                <Expandable.Section id={'third'}>
-                    {({ handleClick, expanded }) => (
+                </Toggleable.Section>
+                <Toggleable.Section id={'third'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-            </Expandable>
+                </Toggleable.Section>
+            </Toggleable>
         );
 
-        // initial expanded state for all sections should be undefined
+        // initial toggled state for all sections should be undefined
         expect(
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         expect(
             wrapper
                 .find('#third')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
         wrapper
             .find('#third')
@@ -320,60 +320,60 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#third')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
         expect(
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
         expect(
             wrapper
                 .find('#second')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
         wrapper.unmount();
     });
-    test('should be set initial expanded to window.location.hash ', () => {
+    test('should be set initial toggled to window.location.hash ', () => {
         window.location.hash = 'second';
 
         const wrapper = mount(
-            <Expandable>
-                <Expandable.Section id={'first'}>
-                    {({ handleClick, expanded }) => (
+            <Toggleable>
+                <Toggleable.Section id={'first'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-                <Expandable.Section id={'second'}>
-                    {({ handleClick, expanded }) => (
+                </Toggleable.Section>
+                <Toggleable.Section id={'second'}>
+                    {({ handleClick, toggled }) => (
                         <>
                             <a id={'link'} onClick={handleClick}>
                                 Header
                             </a>
-                            <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                            <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                                 lorem
                             </div>
                             )
                         </>
                     )}
-                </Expandable.Section>
-            </Expandable>
+                </Toggleable.Section>
+            </Toggleable>
         );
         expect(
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
         wrapper
             .find('#first')
@@ -383,55 +383,59 @@ describe('Expandable Component', () => {
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
 
         wrapper.unmount();
     });
     test('should work with the hook ', () => {
         function FirstComponent() {
-            const { expanded, handleClick } = useExpandable('first');
+            const { toggled, handleClick } = useToggleable('first');
             return (
                 <div id={'first'}>
                     <a id={'link'} onClick={handleClick}>
                         Header
                     </a>
-                    <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                    <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                         lorem
                     </div>
                 </div>
             );
         }
         function SecondComponent() {
-            const { expanded, handleClick } = useExpandable('second');
+            const { toggled, handleClick } = useToggleable('second');
             return (
                 <div id={'second'}>
                     <a id={'link'} onClick={handleClick}>
                         Header
                     </a>
-                    <div id={'section-body'} data-expanded={expanded ? 'true' : 'false'}>
+                    <div id={'section-body'} data-toggled={toggled ? 'true' : 'false'}>
                         lorem
                     </div>
                 </div>
             );
         }
         const wrapper = mount(
-            <Expandable>
+            <Toggleable>
                 <FirstComponent />
                 <SecondComponent />
-            </Expandable>
+            </Toggleable>
         );
         expect(
             wrapper
                 .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('false');
+        wrapper
+            .find('#first')
+            .find('#link')
+            .simulate('click');
         expect(
             wrapper
-                .find('#second')
+                .find('#first')
                 .find('#section-body')
-                .prop('data-expanded')
+                .prop('data-toggled')
         ).toBe('true');
 
         wrapper.unmount();

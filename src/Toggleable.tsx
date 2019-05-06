@@ -1,52 +1,52 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import { normalizeId, without } from './utils';
-interface ExpandableContextTypes {
-    expanded: string[];
+interface ToggleableContextTypes {
+    toggled: string[];
     handleSectionClick: Function;
     handleOpen: Function;
     handleClose: Function;
 }
-interface ExpandableSectionContextTypes {
-    expanded: boolean;
+interface ToggleableSectionContextTypes {
+    toggled: boolean;
     handleClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
     handleOpen: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
     handleClose: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
-const ExpandableContext = createContext<ExpandableContextTypes>({
-    expanded: [],
+const ToggleableContext = createContext<ToggleableContextTypes>({
+    toggled: [],
     handleSectionClick: () => {},
     handleOpen: () => {},
     handleClose: () => {}
 });
 
-export function useExpandable(id: string) {
-    const value = useContext(ExpandableContext);
+export function useToggleable(id: string) {
+    const value = useContext(ToggleableContext);
     return {
-        expanded: value.expanded.includes(id),
+        toggled: value.toggled.includes(id),
         handleClick: value.handleSectionClick(id),
         handleClose: value.handleClose(id),
         handleOpen: value.handleOpen(id)
     };
 }
 
-interface ExpandableSectionProps {
+interface ToggleableSectionProps {
     id: string;
-    children: (props: ExpandableSectionContextTypes) => JSX.Element;
+    children: (props: ToggleableSectionContextTypes) => JSX.Element;
 }
 
-function ExpandableSection({ id, children, ...props }: ExpandableSectionProps): JSX.Element {
-    const value = useContext(ExpandableContext);
+function ToggleableSection({ id, children, ...props }: ToggleableSectionProps): JSX.Element {
+    const value = useContext(ToggleableContext);
     return children({
         ...props,
-        expanded: value.expanded.includes(id),
+        toggled: value.toggled.includes(id),
         handleClick: value.handleSectionClick(id),
         handleClose: value.handleClose(id),
         handleOpen: value.handleOpen(id)
     });
 }
 
-function Expandable({
+function Toggleable({
     initialExpanded = [],
     collapse = false,
     children
@@ -55,15 +55,15 @@ function Expandable({
     collapse?: boolean;
     children: any;
 }) {
-    const [{ expanded }, setExpanded] = useState({ expanded: initialExpanded });
+    const [{ toggled }, setToggled] = useState({ toggled: initialExpanded });
 
     /**
-     * Set expanded if url contains # fragment
+     * Set toggled if url contains # fragment
      */
     const handleLocationChange = () => {
         const { hash } = window.location;
         const ids = hash.split('#');
-        setExpanded({ expanded: expanded.concat(ids) });
+        setToggled({ toggled: toggled.concat(ids) });
     };
     useEffect(() => {
         handleLocationChange();
@@ -79,7 +79,7 @@ function Expandable({
     useEffect(() => {
         const loc = window.location;
         const hashId = normalizeId(loc.hash);
-        if (expanded.includes(hashId)) {
+        if (toggled.includes(hashId)) {
             if ('replaceState' in window.history)
                 window.history.replaceState('', document.title, loc.pathname + loc.search);
             else {
@@ -96,30 +96,30 @@ function Expandable({
         }
     });
     const handleSectionClick = (id: string) => () => {
-        const list = collapse ? [id] : expanded.includes(id) ? without(expanded, id) : expanded.concat(id);
-        setExpanded({ expanded: list });
+        const list = collapse ? [id] : toggled.includes(id) ? without(toggled, id) : toggled.concat(id);
+        setToggled({ toggled: list });
     };
     const handleClose = (id: string) => () => {
-        const list = without(expanded, id);
-        setExpanded({ expanded: list });
+        const list = without(toggled, id);
+        setToggled({ toggled: list });
     };
     const handleOpen = (id: string) => () => {
-        const list = expanded.concat(id);
-        setExpanded({ expanded: list });
+        const list = toggled.concat(id);
+        setToggled({ toggled: list });
     };
 
     return (
-        <ExpandableContext.Provider
+        <ToggleableContext.Provider
             value={{
-                expanded,
+                toggled,
                 handleSectionClick: handleSectionClick,
                 handleOpen: handleOpen,
                 handleClose: handleClose
             }}
         >
             {children}
-        </ExpandableContext.Provider>
+        </ToggleableContext.Provider>
     );
 }
-Expandable.Section = ExpandableSection;
-export default Expandable;
+Toggleable.Section = ToggleableSection;
+export default Toggleable;

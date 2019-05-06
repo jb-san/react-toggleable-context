@@ -1,48 +1,48 @@
-# react-expandable-context
+# react-toggleable-context
 
-React components to make anything to be expandable
+React components to make anything to be toggleable
 
 ## [Demo](https://codesandbox.io/s/m9qzrrymmx)
 
 ## Installation
 
-`npm i react-expandable-context`
+`npm i react-toggleable-context`
 
-`yarn add react-expandable-context`
+`yarn add react-toggleable-context`
 
 ## Usage
 
 ```jsx
-import Expandable from 'react-expandable-context';
+import ToggleGroup from 'react-toggleable-context';
 
 function MyComponent(props) {
     return (
-        <Expandable>
-            <Expandable.Section id={'first'}>
-                {({ handleClick, expanded }) => (
+        <ToggleGroup>
+            <ToggleGroup.Section id={'first'}>
+                {({ handleClick, toggled }) => (
                     <>
                         <a id={'link'} onClick={handleClick}>
                             Header
                         </a>
-                        <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                        <div id={'section-body'} expanded={toggled ? 'true' : 'false'}>
                             lorem
                         </div>)
                     </>
                 )}
-            </Expandable.Section>
-            <Expandable.Section id={'second'}>
-                {({ handleClick, expanded }) => (
+            </ToggleGroup.Section>
+            <ToggleGroup.Section id={'second'}>
+                {({ handleClick, toggled }) => (
                     <>
                         <a id={'link'} onClick={handleClick}>
                             Header
                         </a>
-                        <div id={'section-body'} expanded={expanded ? 'true' : 'false'}>
+                        <div id={'section-body'} expanded={toggled ? 'true' : 'false'}>
                             lorem
                         </div>)
                     </>
                 )}
-            </Expandable.Section>
-        </Expandable>
+            </ToggleGroup.Section>
+        </ToggleGroup>
     );
 }
 ```
