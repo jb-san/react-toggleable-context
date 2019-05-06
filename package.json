@@ -2,9 +2,10 @@
     "name": "react-toggleable-context",
     "version": "1.0.0",
     "description": "React components to make anything expandable",
-    "main": "dist/index.js",
-    "module": "dist/index.es.js",
-    "jsnext:main": "dist/index.es.js",
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
     "scripts": {
         "build": "rm -rf ./lib && tsc",
         "test": "jest --env=jsdom",
