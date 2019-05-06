@@ -2,7 +2,7 @@
 
 React components to make anything to be toggleable
 
-## [Demo](https://codesandbox.io/s/m9qzrrymmx)
+## [Demo](https://codesandbox.io/s/7mlqvn0370)
 
 ## Installation
 
